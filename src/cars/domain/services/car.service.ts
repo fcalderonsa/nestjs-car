@@ -26,5 +26,7 @@ export class CarService {
     const result = this.carsRepository.deleteCar(id);
   }
 
-  async updateCar(updateCardto: UpdateCarDto) {}
+  async updateCar(updateCardto: UpdateCarDto) {
+    const carToUpdate = this.carsRepository.updateCar(updateCardto);
+  }
 }

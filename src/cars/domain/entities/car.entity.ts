@@ -18,5 +18,5 @@ export class Car {
   year: number;
 
   @Column()
-  type: VehicleType;
+  typeVehicle: VehicleType;
 }

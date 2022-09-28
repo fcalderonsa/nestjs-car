@@ -10,5 +10,5 @@ export class CarCreateDto {
   @IsNotEmpty({ message: 'Need a year for the car' })
   year: number;
   @IsNotEmpty({ message: 'Need a vehicle type for the car' })
-  type: VehicleType;
+  typeVehicle: VehicleType;
 }
