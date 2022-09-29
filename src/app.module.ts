@@ -4,6 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm/dist';
 import { Car } from './cars/domain/entities/car.entity';
 import { BrandModule } from './brand/brand.module';
 import { Brand } from './brand/domain/entities/brand.entity';
+import { OwnerModule } from './owner/owner.module';
+import { Owner } from './owner/domain/entities/owner.entity';
 
 @Module({
   imports: [
@@ -16,10 +18,11 @@ import { Brand } from './brand/domain/entities/brand.entity';
       database: 'practice',
       autoLoadEntities: true,
       synchronize: true,
-      entities: [Car, Brand],
+      entities: [Car, Brand, Owner],
     }),
     BrandModule,
     CarsModule,
+    OwnerModule,
   ],
   controllers: [],
   providers: [],

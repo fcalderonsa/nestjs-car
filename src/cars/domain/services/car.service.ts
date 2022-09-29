@@ -4,6 +4,7 @@ import { CarCreateDto } from '../../application/dto/create.car.dto';
 import { CarRepository } from '../../repository/cars.repository';
 import { Car } from '../entities/car.entity';
 import { UpdateCarDto } from '../../application/dto/update.car.dto';
+import { Vehicle } from 'src/cars/application/dto/vehicle.abstract';
 
 @Injectable()
 export class CarService {
@@ -23,10 +24,14 @@ export class CarService {
     return cars;
   }
   async deleteCar(id: string): Promise<void> {
-    const result = this.carsRepository.deleteCar(id);
+    this.carsRepository.deleteCar(id);
   }
 
   async updateCar(updateCardto: UpdateCarDto) {
-    const carToUpdate = this.carsRepository.updateCar(updateCardto);
+    this.carsRepository.updateCar(updateCardto);
+  }
+
+  async createhyperCar(vehicle: Vehicle) {
+    this.carsRepository.createHyperCar(vehicle);
   }
 }

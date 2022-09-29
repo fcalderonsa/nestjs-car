@@ -1,8 +1,9 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { ChildEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, TableInheritance } from 'typeorm';
 import { Brand } from 'src/brand/domain/entities/brand.entity';
 import { VehicleType } from 'src/cars/application/enum/type-vehicle';
 
 @Entity()
+@TableInheritance({ column: { type: 'varchar', name: 'type' } })
 export class Car {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -19,4 +20,13 @@ export class Car {
 
   @Column()
   typeVehicle: VehicleType;
+}
+
+@ChildEntity()
+export class HyperCar extends Car {
+  @Column({ nullable: true })
+  horsePower: number;
+
+  @Column({ nullable: true })
+  hybrid: boolean;
 }
