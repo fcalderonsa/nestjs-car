@@ -6,6 +6,7 @@ import { BrandModule } from './brand/brand.module';
 import { Brand } from './brand/domain/entities/brand.entity';
 import { OwnerModule } from './owner/owner.module';
 import { Owner } from './owner/domain/entities/owner.entity';
+import { OwnerCar } from './owner/domain/entities/owner-car.entity';
 
 @Module({
   imports: [
@@ -18,7 +19,7 @@ import { Owner } from './owner/domain/entities/owner.entity';
       database: 'practice',
       autoLoadEntities: true,
       synchronize: true,
-      entities: [Car, Brand, Owner],
+      entities: [Car, Brand, Owner, OwnerCar],
     }),
     BrandModule,
     CarsModule,

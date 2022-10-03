@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsPositive, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsNumber, IsPositive, IsString, MaxLength, MinLength } from 'class-validator';
 
 export class CreateOwnerDto {
   @IsNotEmpty({ message: 'Need a name for the owner' })
@@ -26,4 +26,7 @@ export class CreateOwnerDto {
   @MinLength(6)
   @MaxLength(32)
   pass: string;
+
+  @IsBoolean()
+  enable: boolean;
 }

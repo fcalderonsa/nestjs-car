@@ -3,6 +3,7 @@ import { OwnerService } from '../../domain/services/owner.service';
 import { CreateOwnerDto } from '../dto/create-owner.dto';
 import { UpdateOwnerDto } from '../dto/update-owner.dto';
 import { CarOwnerDTO } from '../dto/add-Car-Owner.dto';
+import { ParseUUIDPipe } from '@nestjs/common/pipes';
 
 @Controller('owner')
 export class OwnerController {
@@ -29,12 +30,12 @@ export class OwnerController {
   }
 
   @Delete('/delete/:id')
-  remove(@Param('id') id: string) {
-    return this.ownerService.remove(+id);
+  remove(@Param('id', ParseUUIDPipe) id: string) {
+    return this.ownerService.remove(id);
   }
 
   @Post('/addCar')
   addCar(@Body() addCarOwnerDto: CarOwnerDTO) {
-    return 'Car linked to a Owner';
+    return this.ownerService.addCar(addCarOwnerDto);
   }
 }

@@ -4,17 +4,14 @@ import { CarService } from '../../domain/services/car.service';
 import { ParseUUIDPipe, ValidationPipe } from '@nestjs/common/pipes';
 import { UpdateCarDto } from '../dto/update.car.dto';
 import { Vehicle } from 'src/cars/application/dto/vehicle.abstract';
-import { UsePipes } from '@nestjs/common/decorators';
 
 @Controller('cars')
-@UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
 export class CarsController {
   constructor(private readonly carServise: CarService) {}
 
   @Post('/create')
   createCar(@Body() createCardto: CarCreateDto) {
-    const result = this.carServise.createCar(createCardto);
-    return result;
+    return this.carServise.createCar(createCardto);
   }
   @Get('/getAll')
   getAllCars() {

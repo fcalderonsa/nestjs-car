@@ -1,5 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany, ManyToMany, JoinTable } from 'typeorm';
-import { Car } from '../../../cars/domain/entities/car.entity';
+import { Car } from 'src/cars/domain/entities/car.entity';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
 
 @Entity()
 export class Owner {
@@ -18,13 +18,20 @@ export class Owner {
   @Column()
   city: string;
 
-  @ManyToMany(() => Car)
-  @JoinTable()
-  cars: Car[];
+  @Column()
+  enable: boolean;
 
   @Column()
   username: string;
 
   @Column()
   pass: string;
+
+  @ManyToMany(() => Car)
+  @JoinTable({
+    name: 'OwnerCar',
+    joinColumn: { name: 'idOwner', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'idCar', referencedColumnName: 'id' },
+  })
+  cars: Car[];
 }

@@ -1,6 +1,17 @@
-import { ChildEntity, Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, TableInheritance } from 'typeorm';
+import {
+  ChildEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToMany,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  TableInheritance,
+} from 'typeorm';
 import { Brand } from 'src/brand/domain/entities/brand.entity';
 import { VehicleType } from 'src/cars/application/enum/type-vehicle';
+import { type } from 'os';
+import { Owner } from '../../../owner/domain/entities/owner.entity';
 
 @Entity()
 @TableInheritance({ column: { type: 'varchar', name: 'type' } })
@@ -20,6 +31,9 @@ export class Car {
 
   @Column()
   typeVehicle: VehicleType;
+
+  @ManyToMany((type) => Owner)
+  owners: Owner[];
 }
 
 @ChildEntity()

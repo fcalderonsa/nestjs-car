@@ -1,7 +1,7 @@
 import { Repository, EntityRepository } from 'typeorm';
 import { CreateBrandDto } from '../application/dto/create.brand.dto';
 import { Brand } from '../domain/entities/brand.entity';
-import { BadRequestException, NotFoundException } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 
 @EntityRepository(Brand)
 export class BrandRepository extends Repository<Brand> {

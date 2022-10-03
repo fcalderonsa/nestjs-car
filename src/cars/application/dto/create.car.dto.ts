@@ -10,8 +10,6 @@ export class CarCreateDto {
   model: string;
   @IsNotEmpty({ message: 'Need a year for the car' })
   @IsNumber()
-  @MaxLength(4)
-  @MinLength(4)
   year: number;
   @IsNotEmpty({ message: 'Need a vehicle type for the car' })
   typeVehicle: VehicleType;

@@ -4,6 +4,7 @@ import { CreateOwnerDto } from '../../application/dto/create-owner.dto';
 import { UpdateOwnerDto } from '../../application/dto/update-owner.dto';
 import { OwnerRespository } from '../../repository/owner.repository';
 import { Owner } from '../entities/owner.entity';
+import { CarOwnerDTO } from '../../application/dto/add-Car-Owner.dto';
 
 @Injectable()
 export class OwnerService {
@@ -14,6 +15,7 @@ export class OwnerService {
   ) {}
   create(createOwnerDto: CreateOwnerDto) {
     return this.ownerRespository.createOwner(createOwnerDto);
+    this.log.debug(createOwnerDto);
   }
 
   async findAll(): Promise<Owner[]> {
@@ -30,7 +32,11 @@ export class OwnerService {
     return this.ownerRespository.updateOwner(updateOwnerDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} owner`;
+  remove(id: string) {
+    return this.ownerRespository.deleteOwner(id);
+  }
+
+  addCar(addCarOwnerDto: CarOwnerDTO) {
+    return '';
   }
 }
