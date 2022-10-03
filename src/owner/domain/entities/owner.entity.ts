@@ -21,4 +21,10 @@ export class Owner {
   @ManyToMany(() => Car)
   @JoinTable()
   cars: Car[];
+
+  @Column()
+  username: string;
+
+  @Column()
+  pass: string;
 }

@@ -12,7 +12,7 @@ import { Owner } from './owner/domain/entities/owner.entity';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
-      port: 49154,
+      port: 5432,
       username: 'postgres',
       password: 'postgrespw',
       database: 'practice',

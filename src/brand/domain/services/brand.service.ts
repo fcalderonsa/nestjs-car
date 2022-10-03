@@ -12,8 +12,13 @@ export class BrandService {
     private brandrepository: BrandRepository,
   ) {}
 
-  async createBrand(createBranddto: CreateBrandDto) {
-    this.brandrepository.createBrand(createBranddto);
+  async createBrand(createBranddto: CreateBrandDto): Promise<Brand> {
+    const brand = this.brandrepository.createBrand(createBranddto);
     this.log.debug(createBranddto);
+    return brand;
+  }
+  async getAllBrands(): Promise<Brand[]> {
+    const brands = this.brandrepository.getBrands();
+    return brands;
   }
 }

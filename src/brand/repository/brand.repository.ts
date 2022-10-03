@@ -1,7 +1,7 @@
 import { Repository, EntityRepository } from 'typeorm';
 import { CreateBrandDto } from '../application/dto/create.brand.dto';
-import { UpdateBrandDto } from '../application/dto/update.brand.dto';
 import { Brand } from '../domain/entities/brand.entity';
+import { BadRequestException, NotFoundException } from '@nestjs/common';
 
 @EntityRepository(Brand)
 export class BrandRepository extends Repository<Brand> {
@@ -16,8 +16,19 @@ export class BrandRepository extends Repository<Brand> {
   }
   async findBrand(brand: string): Promise<Brand> {
     const query = this.createQueryBuilder('brand');
-    query.where('brand = .brand', { brand });
-    const brands = query.getOneOrFail();
+    query.where('brand.name = :brand', { brand });
+    const brands = query.getOne();
+    if (!brands) {
+      throw new NotFoundException('Brand not found');
+    }
+    return brands;
+  }
+  async getBrands(): Promise<Brand[]> {
+    const query = this.createQueryBuilder('brands');
+    const brands = await query.getMany();
+    if (!brands) {
+      throw new NotFoundException('Brands not found');
+    }
     return brands;
   }
 }

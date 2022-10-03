@@ -1,23 +1,33 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 import { CreateOwnerDto } from '../../application/dto/create-owner.dto';
 import { UpdateOwnerDto } from '../../application/dto/update-owner.dto';
+import { OwnerRespository } from '../../repository/owner.repository';
+import { Owner } from '../entities/owner.entity';
 
 @Injectable()
 export class OwnerService {
+  private readonly log = new Logger();
+  constructor(
+    @InjectRepository(OwnerRespository)
+    private ownerRespository: OwnerRespository,
+  ) {}
   create(createOwnerDto: CreateOwnerDto) {
-    return 'This action adds a new owner';
+    return this.ownerRespository.createOwner(createOwnerDto);
   }
 
-  findAll() {
-    return `This action returns all owner`;
+  async findAll(): Promise<Owner[]> {
+    const owners = this.ownerRespository.getAllOwners();
+    this.log.debug(owners);
+    return owners;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} owner`;
+  findOne(name: string) {
+    return this.ownerRespository.findOwner(name);
   }
 
-  update(id: number, updateOwnerDto: UpdateOwnerDto) {
-    return `This action updates a #${id} owner`;
+  update(updateOwnerDto: UpdateOwnerDto) {
+    return this.ownerRespository.updateOwner(updateOwnerDto);
   }
 
   remove(id: number) {

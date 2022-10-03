@@ -1,13 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { OwnerService } from '../../domain/services/owner.service';
 import { CreateOwnerDto } from '../dto/create-owner.dto';
 import { UpdateOwnerDto } from '../dto/update-owner.dto';
+import { CarOwnerDTO } from '../dto/add-Car-Owner.dto';
 
 @Controller('owner')
 export class OwnerController {
   constructor(private readonly ownerService: OwnerService) {}
 
-  @Post()
+  @Post('/create')
   create(@Body() createOwnerDto: CreateOwnerDto) {
     return this.ownerService.create(createOwnerDto);
   }
@@ -17,18 +18,23 @@ export class OwnerController {
     return this.ownerService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.ownerService.findOne(+id);
+  @Get('/name/:name')
+  findOne(@Param('name') name: string) {
+    return this.ownerService.findOne(name);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateOwnerDto: UpdateOwnerDto) {
-    return this.ownerService.update(+id, updateOwnerDto);
+  @Post(':id')
+  update(@Body() updateOwnerDto: UpdateOwnerDto) {
+    return this.ownerService.update(updateOwnerDto);
   }
 
-  @Delete(':id')
+  @Delete('/delete/:id')
   remove(@Param('id') id: string) {
     return this.ownerService.remove(+id);
+  }
+
+  @Post('/addCar')
+  addCar(@Body() addCarOwnerDto: CarOwnerDTO) {
+    return 'Car linked to a Owner';
   }
 }
