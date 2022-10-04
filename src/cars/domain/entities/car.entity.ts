@@ -32,7 +32,7 @@ export class Car {
   @Column()
   typeVehicle: VehicleType;
 
-  @ManyToMany((type) => Owner)
+  @ManyToOne((type) => Owner, { onDelete: 'NO ACTION', onUpdate: 'NO ACTION' })
   owners: Owner[];
 }
 

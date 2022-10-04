@@ -5,6 +5,7 @@ import { UpdateOwnerDto } from '../../application/dto/update-owner.dto';
 import { OwnerRespository } from '../../repository/owner.repository';
 import { Owner } from '../entities/owner.entity';
 import { CarOwnerDTO } from '../../application/dto/add-Car-Owner.dto';
+import { OwnerCarRespository } from '../../repository/owner-car.repository';
 
 @Injectable()
 export class OwnerService {
@@ -12,6 +13,8 @@ export class OwnerService {
   constructor(
     @InjectRepository(OwnerRespository)
     private ownerRespository: OwnerRespository,
+    @InjectRepository(OwnerCarRespository)
+    private ownerCarRespository: OwnerCarRespository,
   ) {}
   create(createOwnerDto: CreateOwnerDto) {
     return this.ownerRespository.createOwner(createOwnerDto);
@@ -37,6 +40,6 @@ export class OwnerService {
   }
 
   addCar(addCarOwnerDto: CarOwnerDTO) {
-    return '';
+    return this.ownerCarRespository.addCar(addCarOwnerDto);
   }
 }

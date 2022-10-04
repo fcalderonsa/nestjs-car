@@ -1,5 +1,5 @@
 import { Car } from 'src/cars/domain/entities/car.entity';
-import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, JoinTable, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Owner {
@@ -27,7 +27,7 @@ export class Owner {
   @Column()
   pass: string;
 
-  @ManyToMany(() => Car)
+  @ManyToOne(() => Car, { onDelete: 'NO ACTION', onUpdate: 'NO ACTION' })
   @JoinTable({
     name: 'OwnerCar',
     joinColumn: { name: 'idOwner', referencedColumnName: 'id' },

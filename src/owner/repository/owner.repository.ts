@@ -3,8 +3,6 @@ import { Owner } from '../domain/entities/owner.entity';
 import { CreateOwnerDto } from '../application/dto/create-owner.dto';
 import { Logger, NotFoundException } from '@nestjs/common';
 import { UpdateOwnerDto } from '../application/dto/update-owner.dto';
-import { CarOwnerDTO } from '../application/dto/add-Car-Owner.dto';
-import { Car } from 'src/cars/domain/entities/car.entity';
 
 @EntityRepository(Owner)
 export class OwnerRespository extends Repository<Owner> {
@@ -67,14 +65,4 @@ export class OwnerRespository extends Repository<Owner> {
     }
     return owner;
   }
-
-async linkCar(linkCarDto: CarOwnerDTO) {
-  const newOwnerCarDao = this.create(linkCarDto);
-  newOwnerCarDao.cars = linkCarDto.car.map((Car) => {idCar car, idOwner: newOwnerCarDao.id });
-  const newOwnerCars = await this.save(newOwnerCarDao);
-  return newOwnerCars;
-
-}
-
-
 }
